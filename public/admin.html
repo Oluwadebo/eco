@@ -7,18 +7,44 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <title>admin-page</title>
     </head>
-    <body>
+    <body class="p-3 m-0 border-0 bd-example">
         
         <div class="container">
 
-            <div class="row mt-3">
-                <div class="form-floating col-6">
+            <nav class="navbar navbar-light text-dark fixed-top">
+                <div class="container-fluid">
+                  <a class="navbar-brand text-dark" href="#">Anthony</a>
+                  <button class="navbar-toggler bg-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"><span class="navbar-toggler-icon"></span></button>
+                  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                      <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Anthony</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                      <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                          <a class="nav-link text-dark" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link active text-dark" href="admin.html" id="admin">Admin</a>
+                        </li>
+                      </ul>
+                      <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+            <div class="row mt-5">
+                <div class="form-floating col-12 col-md-6">
                     <input type="text" class="form-control" id="floatingInput" placeholder="Todo name">
                     <label for="floatingInput">To Do</label>
                     <button class="btn btn-dark w-100 mt-3" id="todoBtn">Add</button>
                 </div>
             
-                <div class="col-6 mx-auto">
+                <div class="col-12 col-md-6 mx-auto">
                     <h2 class="text-center text-success">The ToDos</h2>
                     <div id="allTodo"></div>
                 </div>
@@ -36,13 +62,14 @@
             // Your web app's Firebase configuration
             // For Firebase JS SDK v7.20.0 and later, measurementId is optional
             const firebaseConfig = {
-            apiKey: "AIzaSyBgKI7IVQe45yIisQRYZZ4ULbn2q1-fuC8",
-            authDomain: "aliga-b5a72.firebaseapp.com",
-            projectId: "aliga-b5a72",
-            storageBucket: "aliga-b5a72.appspot.com",
-            messagingSenderId: "677683179142",
-            appId: "1:677683179142:web:35519cb3a757ca3b672b07",
-            measurementId: "G-21C7SBPML5"
+                apiKey: "AIzaSyBgKI7IVQe45yIisQRYZZ4ULbn2q1-fuC8",
+                authDomain: "aliga-b5a72.firebaseapp.com",
+                databaseURL: "https://aliga-b5a72-default-rtdb.firebaseio.com",
+                projectId: "aliga-b5a72",
+                storageBucket: "aliga-b5a72.appspot.com",
+                messagingSenderId: "677683179142",
+                appId: "1:677683179142:web:35519cb3a757ca3b672b07",
+                measurementId: "G-21C7SBPML5"
             };
         
             // Initialize Firebase
@@ -58,9 +85,9 @@
             onValue(dbRef, function(result){
                 let todoArray = result.val();
                 if (todoArray) {
-                todoId = todoArray.length;
-                displayTodo(todoArray);
-                console.log(todoArray, todoArray.length);
+                    todoId = todoArray.length;
+                    displayTodo(todoArray);
+                    console.log(todoArray, todoArray.length);
                 } else {
                     todoId = 0;         
                 }
@@ -70,14 +97,14 @@
             document.getElementById("todoBtn").addEventListener("click", function(){
                 let todo = floatingInput.value;
                 let todoRef = ref(db, `todos/${todoId}`);
-                set(todoRef, {todo:todo,todo:time});
+                set(todoRef, {tode:todo,totime:time});
                 floatingInput.value = ""
             })
 
             function displayTodo (todoArray) {
                 let todoHTML = "";
                 todoArray.map((todo, i) => {
-                    todoHTML += `<div class="card shadow my-2"><h3 class="p-3 d-flex">${i+1}. ${todo.todo} ${todo.time}</h3></div>`
+                    todoHTML += `<div class="card shadow my-2"><h3 class="p-3 d-flex">${i+1}. ${tode.todo} ${totime.time}</h3></div>`
                 })
                 allTodo.innerHTML = todoHTML;
             }
